@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers — VendorLink</title>
+    <meta name="description" content="Join VendorLink and help build the future of wearable payments in South Korea. View open positions and apply now.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== Career Page Specific Styles ===== */
+        .careers-hero {
+            background: var(--gradient-dark);
+            color: var(--white);
+            padding: 140px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .careers-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .careers-hero .container { position: relative; z-index: 1; }
+        .careers-hero h1 { margin-bottom: 16px; }
+        .careers-hero p { color: var(--text-light); font-size: 1.15rem; max-width: 560px; margin: 0 auto; }
+
+        .careers-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,229,204,0.1);
+            border: 1px solid rgba(0,229,204,0.2);
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 24px;
+        }
+
+        /* Job Listings */
+        .careers-content { padding: 80px 0; background: var(--light-gray); }
+
+        .careers-filters {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 100px;
+            border: 1px solid #e5e7eb;
+            background: var(--white);
+            color: var(--dark-gray);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--secondary-navy);
+            color: var(--white);
+            border-color: var(--secondary-navy);
+        }
+
+        .job-grid { display: flex; flex-direction: column; gap: 16px; }
+
+        .job-card {
+            background: var(--white);
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 32px;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: center;
+        }
+        .job-card:hover {
+            border-color: rgba(0,229,204,0.3);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .job-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .job-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .job-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+        }
+        .job-meta-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--accent-cyan);
+        }
+
+        .job-apply-btn {
+            padding: 12px 28px;
+            background: var(--gradient-accent);
+            color: var(--secondary-navy);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .job-apply-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0,229,204,0.3);
+        }
+
+        /* Job Detail Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,22,40,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 720px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .modal-header {
+            background: var(--gradient-dark);
+            color: var(--white);
+            padding: 32px 36px;
+            border-radius: 20px 20px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .modal-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--white);
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--white);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .modal-close:hover { background: rgba(255,255,255,0.2); }
+
+        .modal-body { padding: 36px; }
+
+        .modal-section { margin-bottom: 28px; }
+        .modal-section h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(0,229,204,0.15);
+        }
+        .modal-section p {
+            color: var(--dark-gray);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        .req-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .req-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            line-height: 1.5;
+        }
+        .req-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+
+        /* Application Form */
+        .apply-section { padding: 36px; border-top: 1px solid #e5e7eb; }
+        .apply-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 24px;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .form-group label .required {
+            color: #ef4444;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: var(--font-main);
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: var(--white);
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px rgba(0,229,204,0.1);
+        }
+        .form-group input[type="file"] {
+            padding: 10px;
+            background: var(--light-gray);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-submit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient-accent);
+            color: var(--secondary-navy);
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .form-submit:hover { box-shadow: 0 6px 20px rgba(0,229,204,0.35); transform: translateY(-1px); }
+        .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .form-submit.success { background: #10B981; color: white; }
+
+        .form-note {
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--dark-gray);
+            margin-top: 12px;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--secondary-navy);
+            color: var(--white);
+            padding: 16px 24px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 3000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { border-left: 4px solid var(--accent-cyan); }
+        .toast.error { border-left: 4px solid #ef4444; }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 24px;
+        }
+        .empty-state svg { margin-bottom: 16px; opacity: 0.3; }
+        .empty-state p { color: var(--dark-gray); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .job-card { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .modal { margin: 12px; max-height: 95vh; }
+            .modal-header { padding: 24px; }
+            .modal-body { padding: 24px; }
+            .apply-section { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-container">
+            <a href="/" class="nav-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="url(#lg1)" stroke-width="2.5" fill="none"/><path d="M14 20L18 26L28 14" stroke="url(#lg1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="lg1" x1="0" y1="0" x2="40" y2="40"><stop offset="0%" stop-color="#00E5CC"/><stop offset="100%" stop-color="#00B4D8"/></linearGradient></defs></svg>
+                </div>
+                <span class="logo-text">VENDOR<span class="accent">LINK</span></span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/#about" class="nav-link">About</a></li>
+                <li><a href="/#technology" class="nav-link">Technology</a></li>
+                <li><a href="/careers" class="nav-link active">Careers</a></li>
+                <li><a href="/#contact" class="nav-link nav-cta">Partner With Us</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <!-- CAREERS HERO -->
+    <section class="careers-hero">
+        <div class="container">
+            <div class="careers-count" id="openingsCount">
+                <span style="width:8px;height:8px;background:#00E5CC;border-radius:50%;"></span>
+                <span id="countText">Loading positions...</span>
+            </div>
+            <h1>Build the Future of<br><span class="gradient-text">Wearable Payments</span></h1>
+            <p>Join a team of researchers and engineers from IIT Kanpur and Seoul National University. We're creating the payment infrastructure that South Korea needs.</p>
+        </div>
+    </section>
+
+    <!-- JOB LISTINGS -->
+    <section class="careers-content">
+        <div class="container">
+            <div class="careers-filters" id="filtersContainer">
+                <button class="filter-btn active" data-filter="all">All Positions</button>
+                <button class="filter-btn" data-filter="Engineering">Engineering</button>
+                <button class="filter-btn" data-filter="Design">Design</button>
+                <button class="filter-btn" data-filter="Business">Business</button>
+            </div>
+
+            <div class="job-grid" id="jobGrid">
+                <!-- Jobs will be populated by JS -->
+            </div>
+
+            <div class="empty-state" id="emptyState" style="display:none;">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none"><path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.134 17 3 13.866 3 10C3 6.134 6.134 3 10 3C13.866 3 17 6.134 17 10Z" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/></svg>
+                <p>No open positions in this category right now.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- JOB DETAIL + APPLICATION MODAL -->
+    <div class="modal-overlay" id="jobModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Job Title</h2>
+                <div class="job-meta" style="margin-top:8px;">
+                    <span class="job-meta-item" style="color:rgba(255,255,255,0.7);" id="modalMeta"></span>
+                </div>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>About This Role</h3>
+                    <p id="modalDescription"></p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Requirements</h3>
+                    <ul class="req-list" id="modalRequirements"></ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Responsibilities</h3>
+                    <ul class="req-list" id="modalResponsibilities"></ul>
+                </div>
+            </div>
+
+            <div class="apply-section">
+                <h3>📝 Apply for This Position</h3>
+                <form id="applicationForm" enctype="multipart/form-data">
+                    <input type="hidden" id="appCareerId" name="careerId">
+                    <input type="hidden" id="appCareerTitle" name="careerTitle">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name <span class="required">*</span></label>
+                            <input type="text" name="name" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" name="email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone" placeholder="+82-10-XXXX-XXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Experience <span class="required">*</span></label>
+                            <input type="text" name="experience" placeholder="e.g., 3 years" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" name="address" placeholder="City, Country">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Education <span class="required">*</span></label>
+                        <textarea name="education" rows="2" placeholder="e.g., B.Tech CSE from KAIST, 2020" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Resume / CV <span class="required">*</span></label>
+                            <input type="file" name="resume" accept=".pdf,.doc,.docx" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Cover Letter (File)</label>
+                            <input type="file" name="coverLetter" accept=".pdf,.doc,.docx,.txt">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cover Letter (Text)</label>
+                        <textarea name="coverLetterText" rows="4" placeholder="Or type your cover letter here..."></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit" id="submitBtn">
+                        <span>Submit Application</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <p class="form-note">Your information is securely stored and only shared with our hiring team.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="border-top:none;">
+                <p class="footer-copyright">&copy; 2026 VendorLink. All rights reserved. Incubated at SIIC, IIT Kanpur.</p>
+                <div class="footer-legal">
+                    <a href="/">Home</a>
+                    <a href="/careers">Careers</a>
+                    <a href="/#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    const API = '';
+    let allJobs = [];
+    let currentFilter = 'all';
+
+    // ===== LOAD JOBS =====
+    async function loadJobs() {
+        try {
+            const res = await fetch(`${API}/api/careers`);
+            const data = await res.json();
+            if (data.success) {
+                allJobs = data.data;
+                document.getElementById('countText').textContent = `${allJobs.length} Open Position${allJobs.length !== 1 ? 's' : ''}`;
+                renderJobs();
+            }
+        } catch (err) {
+            console.error('Failed to load jobs:', err);
+            document.getElementById('countText').textContent = 'Unable to load positions';
+        }
+    }
+
+    function renderJobs() {
+        const grid = document.getElementById('jobGrid');
+        const empty = document.getElementById('emptyState');
+        const filtered = currentFilter === 'all' ? allJobs : allJobs.filter(j => j.department === currentFilter);
+
+        if (filtered.length === 0) {
+            grid.innerHTML = '';
+            empty.style.display = 'block';
+            return;
+        }
+
+        empty.style.display = 'none';
+        grid.innerHTML = filtered.map(job => `
+            <div class="job-card" onclick="openJobModal('${job.id}')">
+                <div>
+                    <div class="job-title">${job.title}</div>
+                    <div class="job-meta">
+                        <span class="job-meta-item">
+                            <svg class="job-meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1C4.13 1 1 4.13 1 8C1 11.87 4.13 15 8 15C11.87 15 15 11.87 15 8C15 4.13 11.87 1 8 1Z" stroke="currentColor" stroke-width="1.2"/><path d="M8 4V8L11 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                            ${job.type}
+                        </span>
+                        <span class="job-meta-item">
+                            <svg class="job-meta-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1C5.24 1 3 3.24 3 6C3 9.75 8 15 8 15C8 15 13 9.75 13 6C13 3.24 10.76 1 8 1Z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6" r="2" stroke="currentColor" stroke-width="1.2"/></svg>
+                            ${job.location}
+                        </span>
+                        <span class="job-meta-item">
+                            <svg class="job-meta-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5 3V1M11 3V1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                            ${job.department}
+                        </span>
+                        <span class="job-meta-item">
+                            <svg class="job-meta-icon" viewBox="0 0 16 16" fill="none"><path d="M2 13C2 10.79 5.58 9 8 9C10.42 9 14 10.79 14 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.2"/></svg>
+                            ${job.experience}
+                        </span>
+                    </div>
+                </div>
+                <button class="job-apply-btn" onclick="event.stopPropagation(); openJobModal('${job.id}', true)">Apply Now</button>
+            </div>
+        `).join('');
+    }
+
+    // ===== FILTERS =====
+    document.getElementById('filtersContainer').addEventListener('click', (e) => {
+        if (e.target.classList.contains('filter-btn')) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            currentFilter = e.target.dataset.filter;
+            renderJobs();
+        }
+    });
+
+    // ===== JOB MODAL =====
+    function openJobModal(jobId, scrollToForm = false) {
+        const job = allJobs.find(j => j.id === jobId);
+        if (!job) return;
+
+        document.getElementById('modalTitle').textContent = job.title;
+        document.getElementById('modalMeta').innerHTML = `${job.type} &nbsp;·&nbsp; ${job.location} &nbsp;·&nbsp; ${job.experience}`;
+        document.getElementById('modalDescription').textContent = job.description;
+
+        const reqList = document.getElementById('modalRequirements');
+        reqList.innerHTML = (job.requirements || '').split('|').map(r => `<li>${r.trim()}</li>`).join('');
+
+        const respList = document.getElementById('modalResponsibilities');
+        respList.innerHTML = (job.responsibilities || '').split('|').map(r => `<li>${r.trim()}</li>`).join('');
+
+        document.getElementById('appCareerId').value = job.id;
+        document.getElementById('appCareerTitle').value = job.title;
+
+        const modal = document.getElementById('jobModal');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        if (scrollToForm) {
+            setTimeout(() => {
+                modal.querySelector('.apply-section').scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('jobModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeModal();
+    });
+
+    function closeModal() {
+        document.getElementById('jobModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    // ===== APPLICATION FORM =====
+    document.getElementById('applicationForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<span>Submitting...</span>';
+
+        try {
+            const formData = new FormData(e.target);
+            const res = await fetch(`${API}/api/applications`, { method: 'POST', body: formData });
+            const data = await res.json();
+
+            if (data.success) {
+                btn.innerHTML = '<span>✓ Application Submitted!</span>';
+                btn.classList.add('success');
+                showToast('Application submitted successfully! We will review it shortly.', 'success');
+                setTimeout(() => {
+                    closeModal();
+                    e.target.reset();
+                    btn.disabled = false;
+                    btn.classList.remove('success');
+                    btn.innerHTML = '<span>Submit Application</span><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+                }, 3000);
+            } else {
+                throw new Error(data.error || 'Submission failed');
+            }
+        } catch (err) {
+            btn.disabled = false;
+            btn.innerHTML = '<span>Submit Application</span><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            showToast(err.message || 'Failed to submit. Please try again.', 'error');
+        }
+    });
+
+    // ===== TOAST =====
+    function showToast(msg, type = 'success') {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => { toast.classList.remove('show'); }, 4000);
+    }
+
+    // ===== MOBILE MENU =====
+    document.getElementById('navToggle').addEventListener('click', function() {
+        this.classList.toggle('active');
+        document.getElementById('navMenu').classList.toggle('active');
+    });
+
+    // ===== INIT =====
+    loadJobs();
+    </script>
+</body>
+</html>

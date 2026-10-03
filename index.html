@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VendorLink — Unified Wearable Payment Infrastructure for South Korea</title>
+    <meta name="description" content="VendorLink builds unified smartwatch-based payment software for South Korea. QR-code payments with or without internet. B2B payment infrastructure solutions.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="assets/images/vendorlink-logo.jpeg">
+</head>
+<body>
+    <!-- ====== PRELOADER ====== -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-ring"></div>
+            <span class="preloader-text">VENDOR<span class="accent">LINK</span></span>
+        </div>
+    </div>
+
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="18" stroke="url(#logoGrad)" stroke-width="2.5" fill="none"/>
+                        <path d="M14 20L18 26L28 14" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#00E5CC"/>
+                                <stop offset="100%" stop-color="#00B4D8"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">VENDOR<span class="accent">LINK</span></span>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#technology" class="nav-link">Technology</a></li>
+                <li><a href="#solutions" class="nav-link">Solutions</a></li>
+                <li><a href="#market" class="nav-link">Market</a></li>
+                <li><a href="#team" class="nav-link">Team</a></li>
+                <li><a href="/careers" class="nav-link">Careers</a></li>
+                <li><a href="#contact" class="nav-link nav-cta">Partner With Us</a></li>
+            </ul>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ====== HERO SECTION ====== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-grid"></div>
+        <div class="hero-particles" id="heroParticles"></div>
+        
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-badge" data-reveal>
+                    <span class="badge-dot"></span>
+                    <span>Pioneering Wearable Payments in South Korea</span>
+                </div>
+                
+                <h1 class="hero-title" data-reveal data-delay="100">
+                    Unified Payment<br>
+                    <span class="gradient-text">Infrastructure</span><br>
+                    for the Wrist
+                </h1>
+                
+                <p class="hero-subtitle" data-reveal data-delay="200">
+                    We build enterprise payment software that enables QR-code transactions 
+                    through smartwatches — with or without internet. Empowering businesses 
+                    across South Korea with next-generation wearable payment technology.
+                </p>
+                
+                <div class="hero-actions" data-reveal data-delay="300">
+                    <a href="#contact" class="btn btn-primary btn-lg">
+                        <span>Request Enterprise Demo</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#technology" class="btn btn-ghost btn-lg">
+                        <span>Explore Technology</span>
+                    </a>
+                </div>
+                
+                <div class="hero-stats" data-reveal data-delay="400">
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">Offline</span>
+                        <span class="hero-stat-label">Transaction Capable</span>
+                    </div>
+                    <div class="hero-stat-divider"></div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">QR</span>
+                        <span class="hero-stat-label">Code Based Payments</span>
+                    </div>
+                    <div class="hero-stat-divider"></div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">B2B</span>
+                        <span class="hero-stat-label">Enterprise Ready</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual" data-reveal data-delay="200">
+                <div class="device-showcase">
+                    <div class="device-glow"></div>
+                    <div class="device-mockup">
+                        <div class="smartwatch-frame">
+                            <div class="smartwatch-screen">
+                                <div class="screen-content">
+                                    <div class="screen-header">
+                                        <span class="screen-time">14:32</span>
+                                        <div class="screen-indicators">
+                                            <span class="indicator-dot active"></span>
+                                            <span class="indicator-wifi"></span>
+                                        </div>
+                                    </div>
+                                    <div class="screen-qr">
+                                        <div class="qr-placeholder">
+                                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="5" y="5" width="30" height="30" rx="2" fill="#1B2A4A"/>
+                                                <rect x="10" y="10" width="20" height="20" rx="1" fill="none" stroke="#00E5CC" stroke-width="2"/>
+                                                <rect x="14" y="14" width="12" height="12" rx="1" fill="#00E5CC"/>
+                                                <rect x="65" y="5" width="30" height="30" rx="2" fill="#1B2A4A"/>
+                                                <rect x="70" y="10" width="20" height="20" rx="1" fill="none" stroke="#00E5CC" stroke-width="2"/>
+                                                <rect x="74" y="14" width="12" height="12" rx="1" fill="#00E5CC"/>
+                                                <rect x="5" y="65" width="30" height="30" rx="2" fill="#1B2A4A"/>
+                                                <rect x="10" y="70" width="20" height="20" rx="1" fill="none" stroke="#00E5CC" stroke-width="2"/>
+                                                <rect x="14" y="74" width="12" height="12" rx="1" fill="#00E5CC"/>
+                                                <rect x="40" y="5" width="8" height="8" fill="#1B2A4A"/>
+                                                <rect x="52" y="5" width="8" height="8" fill="#00E5CC"/>
+                                                <rect x="40" y="17" width="8" height="8" fill="#00E5CC"/>
+                                                <rect x="52" y="17" width="8" height="8" fill="#1B2A4A"/>
+                                                <rect x="40" y="40" width="20" height="20" rx="4" fill="#00E5CC"/>
+                                                <rect x="46" y="46" width="8" height="8" rx="2" fill="#0A1628"/>
+                                                <rect x="65" y="40" width="8" height="8" fill="#1B2A4A"/>
+                                                <rect x="77" y="40" width="8" height="8" fill="#00E5CC"/>
+                                                <rect x="89" y="40" width="6" height="8" fill="#1B2A4A"/>
+                                                <rect x="65" y="52" width="8" height="8" fill="#00E5CC"/>
+                                                <rect x="77" y="52" width="8" height="8" fill="#1B2A4A"/>
+                                                <rect x="5" y="40" width="8" height="8" fill="#00E5CC"/>
+                                                <rect x="17" y="40" width="8" height="8" fill="#1B2A4A"/>
+                                                <rect x="5" y="52" width="8" height="8" fill="#1B2A4A"/>
+                                                <rect x="17" y="52" width="8" height="8" fill="#00E5CC"/>
+                                                <rect x="40" y="65" width="8" height="8" fill="#1B2A4A"/>
+                                                <rect x="52" y="65" width="8" height="8" fill="#00E5CC"/>
+                                                <rect x="65" y="65" width="30" height="30" rx="2" fill="none" stroke="#1B2A4A" stroke-width="2" stroke-dasharray="4 2"/>
+                                                <rect x="40" y="77" width="8" height="8" fill="#00E5CC"/>
+                                                <rect x="52" y="77" width="8" height="8" fill="#1B2A4A"/>
+                                                <rect x="40" y="89" width="8" height="6" fill="#1B2A4A"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="screen-label">Scan & Pay</div>
+                                    <div class="screen-footer">
+                                        <span class="screen-brand">VendorLink</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-card card-1">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L12.5 7.5L18 8.5L14 12.5L15 18L10 15.5L5 18L6 12.5L2 8.5L7.5 7.5L10 2Z" fill="#00E5CC"/></svg>
+                        <span>Offline Ready</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#00E5CC" stroke-width="2"/><path d="M10 6V10L13 13" stroke="#00E5CC" stroke-width="2" stroke-linecap="round"/></svg>
+                        <span>7-Day Battery</span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.58 2 2 5.58 2 10C2 14.42 5.58 18 10 18C14.42 18 18 14.42 18 10" stroke="#00E5CC" stroke-width="2" stroke-linecap="round"/><path d="M18 2L10 10" stroke="#00E5CC" stroke-width="2" stroke-linecap="round"/><path d="M14 2H18V6" stroke="#00E5CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span>Multi-VPA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ====== TRUSTED BY (B2B TRUST BAR) ====== -->
+    <section class="trust-bar">
+        <div class="container">
+            <p class="trust-label" data-reveal>Backed by world-class institutions & advisors</p>
+            <div class="trust-logos" data-reveal data-delay="100">
+                <div class="trust-logo-item">
+                    <span class="trust-logo-text">IIT Kanpur</span>
+                    <span class="trust-logo-sub">SIIC Incubation</span>
+                </div>
+                <div class="trust-logo-item">
+                    <span class="trust-logo-text">Kolkata Ventures</span>
+                    <span class="trust-logo-sub">Virtual Incubation</span>
+                </div>
+                <div class="trust-logo-item">
+                    <span class="trust-logo-text">Seoul National University</span>
+                    <span class="trust-logo-sub">Research Collaboration</span>
+                </div>
+                <div class="trust-logo-item">
+                    <span class="trust-logo-text">FIRST Lab</span>
+                    <span class="trust-logo-sub">IIT Kanpur</span>
+                </div>
+                <div class="trust-logo-item">
+                    <span class="trust-logo-text">South Korea</span>
+                    <span class="trust-logo-sub">Market Funding</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ABOUT / PROBLEM-SOLUTION ====== -->
+    <section class="section about-section" id="about">
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <span class="section-tag">Why VendorLink</span>
+                <h2 class="section-title">South Korea Needs a Unified<br><span class="gradient-text">Wearable Payment Standard</span></h2>
+                <p class="section-desc">Despite being a global technology leader, South Korea lacks a unified wearable payment method. 
+                    We're building the software infrastructure to change that — enabling seamless QR-based transactions 
+                    from any smartwatch, with or without internet connectivity.</p>
+            </div>
+            
+            <div class="problem-solution-grid">
+                <div class="ps-card problem-card" data-reveal>
+                    <div class="ps-card-icon problem-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <circle cx="16" cy="16" r="14" stroke="#FF4757" stroke-width="2"/>
+                            <path d="M16 10V18M16 22V22.01" stroke="#FF4757" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="ps-card-title">The Problem</h3>
+                    <ul class="ps-list">
+                        <li>
+                            <span class="ps-list-icon">✕</span>
+                            <span>No unified wearable payment standard exists in South Korea</span>
+                        </li>
+                        <li>
+                            <span class="ps-list-icon">✕</span>
+                            <span>Existing solutions are fragmented across proprietary ecosystems</span>
+                        </li>
+                        <li>
+                            <span class="ps-list-icon">✕</span>
+                            <span>Offline payment capability remains largely unsupported</span>
+                        </li>
+                        <li>
+                            <span class="ps-list-icon">✕</span>
+                            <span>Hardware vendors lack interoperable payment software</span>
+                        </li>
+                        <li>
+                            <span class="ps-list-icon">✕</span>
+                            <span>QR-code based wearable payments are virtually non-existent</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="ps-card solution-card" data-reveal data-delay="150">
+                    <div class="ps-card-icon solution-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <circle cx="16" cy="16" r="14" stroke="#00E5CC" stroke-width="2"/>
+                            <path d="M10 16L14 20L22 12" stroke="#00E5CC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="ps-card-title">Our Solution</h3>
+                    <ul class="ps-list">
+                        <li>
+                            <span class="ps-list-icon success">✓</span>
+                            <span>Unified payment software platform for all smartwatch hardware</span>
+                        </li>
+                        <li>
+                            <span class="ps-list-icon success">✓</span>
+                            <span>QR code based payments — scan and transact instantly</span>
+                        </li>
+                        <li>
+                            <span class="ps-list-icon success">✓</span>
+                            <span>Works with or without internet connectivity (offline mode)</span>
+                        </li>
+                        <li>
+                            <span class="ps-list-icon success">✓</span>
+                            <span>B2B software licensing — companies integrate on their hardware</span>
+                        </li>
+                        <li>
+                            <span class="ps-list-icon success">✓</span>
+                            <span>Multi-VPA support with real-time transaction notifications</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== TECHNOLOGY SECTION ====== -->
+    <section class="section tech-section" id="technology">
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <span class="section-tag">Our Technology</span>
+                <h2 class="section-title">Enterprise-Grade Payment<br><span class="gradient-text">Software Platform</span></h2>
+                <p class="section-desc">Our payment infrastructure is designed from the ground up for reliability, 
+                    security, and interoperability. Companies license our software to deploy on their wearable hardware.</p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-card" data-reveal>
+                    <div class="tech-card-number">01</div>
+                    <div class="tech-card-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect x="8" y="8" width="32" height="32" rx="8" stroke="url(#g1)" stroke-width="2"/>
+                            <path d="M16 24H32M24 16V32" stroke="url(#g1)" stroke-width="2" stroke-linecap="round"/>
+                            <defs><linearGradient id="g1" x1="8" y1="8" x2="40" y2="40"><stop stop-color="#00E5CC"/><stop offset="1" stop-color="#00B4D8"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <h3 class="tech-card-title">QR-Based Payment Engine</h3>
+                    <p class="tech-card-desc">Dynamic QR code generation and scanning optimized for small wearable screens. Supports both merchant-presented and customer-presented QR flows.</p>
+                </div>
+                
+                <div class="tech-card" data-reveal data-delay="100">
+                    <div class="tech-card-number">02</div>
+                    <div class="tech-card-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 6L24 12M24 36L24 42M6 24H12M36 24H42M11.5 11.5L15.7 15.7M32.3 32.3L36.5 36.5M36.5 11.5L32.3 15.7M15.7 32.3L11.5 36.5" stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="24" cy="24" r="8" stroke="url(#g2)" stroke-width="2"/>
+                            <defs><linearGradient id="g2" x1="6" y1="6" x2="42" y2="42"><stop stop-color="#00E5CC"/><stop offset="1" stop-color="#00B4D8"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <h3 class="tech-card-title">Offline Transaction Protocol</h3>
+                    <p class="tech-card-desc">Proprietary offline transaction storage and synchronization. Payments are securely cached and reconciled when connectivity is restored via MQTT protocol.</p>
+                </div>
+                
+                <div class="tech-card" data-reveal data-delay="200">
+                    <div class="tech-card-number">03</div>
+                    <div class="tech-card-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 4L28 12H36L30 18L32 26L24 22L16 26L18 18L12 12H20L24 4Z" stroke="url(#g3)" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="24" cy="36" r="8" stroke="url(#g3)" stroke-width="2"/>
+                            <path d="M20 36L23 39L28 33" stroke="url(#g3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs><linearGradient id="g3" x1="12" y1="4" x2="36" y2="44"><stop stop-color="#00E5CC"/><stop offset="1" stop-color="#00B4D8"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <h3 class="tech-card-title">Multi-VPA Architecture</h3>
+                    <p class="tech-card-desc">Support for multiple Virtual Payment Addresses on a single device. Vendors and businesses can manage separate payment channels seamlessly.</p>
+                </div>
+                
+                <div class="tech-card" data-reveal data-delay="300">
+                    <div class="tech-card-number">04</div>
+                    <div class="tech-card-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect x="6" y="14" width="36" height="20" rx="4" stroke="url(#g4)" stroke-width="2"/>
+                            <path d="M14 14V10C14 7.8 15.8 6 18 6H30C32.2 6 34 7.8 34 10V14" stroke="url(#g4)" stroke-width="2"/>
+                            <circle cx="24" cy="24" r="4" stroke="url(#g4)" stroke-width="2"/>
+                            <path d="M24 28V38" stroke="url(#g4)" stroke-width="2" stroke-linecap="round"/>
+                            <defs><linearGradient id="g4" x1="6" y1="6" x2="42" y2="42"><stop stop-color="#00E5CC"/><stop offset="1" stop-color="#00B4D8"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <h3 class="tech-card-title">Hardware-Agnostic SDK</h3>
+                    <p class="tech-card-desc">Our software integrates with any smartwatch platform. Companies license the SDK to embed payment capabilities directly into their existing wearable products.</p>
+                </div>
+                
+                <div class="tech-card" data-reveal data-delay="400">
+                    <div class="tech-card-number">05</div>
+                    <div class="tech-card-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 4V8M24 40V44M44 24H40M8 24H4M38.1 9.9L35.3 12.7M12.7 35.3L9.9 38.1M38.1 38.1L35.3 35.3M12.7 12.7L9.9 9.9" stroke="url(#g5)" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="24" cy="24" r="12" stroke="url(#g5)" stroke-width="2"/>
+                            <path d="M18 24L22 28L30 20" stroke="url(#g5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs><linearGradient id="g5" x1="4" y1="4" x2="44" y2="44"><stop stop-color="#00E5CC"/><stop offset="1" stop-color="#00B4D8"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <h3 class="tech-card-title">Real-Time Notifications</h3>
+                    <p class="tech-card-desc">Instant haptic and visual payment confirmations. Transaction status, balance updates, and security alerts delivered in real-time to the wrist.</p>
+                </div>
+                
+                <div class="tech-card" data-reveal data-delay="500">
+                    <div class="tech-card-number">06</div>
+                    <div class="tech-card-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 4C18 4 14 8 14 14V20H10C8.9 20 8 20.9 8 22V42C8 43.1 8.9 44 10 44H38C39.1 44 40 43.1 40 42V22C40 20.9 39.1 20 38 20H34V14C34 8 30 4 24 4Z" stroke="url(#g6)" stroke-width="2"/>
+                            <circle cx="24" cy="32" r="3" fill="url(#g6)"/>
+                            <path d="M24 35V38" stroke="url(#g6)" stroke-width="2" stroke-linecap="round"/>
+                            <defs><linearGradient id="g6" x1="8" y1="4" x2="40" y2="44"><stop stop-color="#00E5CC"/><stop offset="1" stop-color="#00B4D8"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <h3 class="tech-card-title">Bank-Grade Security</h3>
+                    <p class="tech-card-desc">End-to-end encryption, two-factor authentication, and secure element integration. Built to meet the most stringent financial regulatory requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== HOW IT WORKS (B2B FLOW) ====== -->
+    <section class="section solutions-section" id="solutions">
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <span class="section-tag">B2B Solutions</span>
+                <h2 class="section-title">How Companies<br><span class="gradient-text">Integrate VendorLink</span></h2>
+                <p class="section-desc">We provide the payment software — your company brings the hardware. 
+                    A simple, powerful partnership model designed for scale.</p>
+            </div>
+            
+            <div class="process-timeline">
+                <div class="process-line"></div>
+                
+                <div class="process-step" data-reveal>
+                    <div class="process-marker">
+                        <span>1</span>
+                    </div>
+                    <div class="process-content">
+                        <h3>License Our SDK</h3>
+                        <p>Access VendorLink's payment software development kit. Our modular architecture integrates seamlessly with your existing smartwatch operating system and hardware.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step" data-reveal data-delay="150">
+                    <div class="process-marker">
+                        <span>2</span>
+                    </div>
+                    <div class="process-content">
+                        <h3>Customize & Deploy</h3>
+                        <p>White-label the payment interface to match your brand. Configure payment methods, security protocols, and user experience flows for your target market.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step" data-reveal data-delay="300">
+                    <div class="process-marker">
+                        <span>3</span>
+                    </div>
+                    <div class="process-content">
+                        <h3>Connect to Payment Rails</h3>
+                        <p>Integrate with local and international payment networks. Our software supports multiple payment protocols and banking partners across South Korea.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step" data-reveal data-delay="450">
+                    <div class="process-marker">
+                        <span>4</span>
+                    </div>
+                    <div class="process-content">
+                        <h3>Scale & Grow</h3>
+                        <p>Launch to your users with full VendorLink support. Access real-time analytics, transaction monitoring, and dedicated enterprise support.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Promo Video Section -->
+            <div class="video-section" data-reveal>
+                <div class="video-wrapper">
+                    <video id="promoVideo" poster="assets/images/prototype-device.png" controls preload="metadata">
+                        <source src="assets/VendorLink_Promo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-overlay" id="videoOverlay">
+                        <button class="video-play-btn" id="videoPlayBtn" aria-label="Play video">
+                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                <circle cx="30" cy="30" r="29" stroke="white" stroke-width="2"/>
+                                <path d="M24 18L42 30L24 42V18Z" fill="white"/>
+                            </svg>
+                        </button>
+                        <span class="video-label">Watch Our Product Demo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== MARKET OPPORTUNITY / STATS ====== -->
+    <section class="section stats-section" id="market">
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <span class="section-tag">Market Opportunity</span>
+                <h2 class="section-title">South Korea:<br><span class="gradient-text">The Perfect Market</span></h2>
+                <p class="section-desc">South Korea's advanced digital infrastructure, high smartphone penetration, and 
+                    appetite for innovation create the ideal environment for wearable payment adoption.</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card" data-reveal>
+                    <div class="stat-value">
+                        <span class="counter" data-target="97">0</span><span class="stat-suffix">%</span>
+                    </div>
+                    <div class="stat-label">Smartphone Penetration in South Korea</div>
+                    <div class="stat-bar"><div class="stat-bar-fill" style="--fill: 97%"></div></div>
+                </div>
+                
+                <div class="stat-card" data-reveal data-delay="100">
+                    <div class="stat-value">
+                        $<span class="counter" data-target="180">0</span><span class="stat-suffix">B+</span>
+                    </div>
+                    <div class="stat-label">Digital Payment Market Size (Korea)</div>
+                    <div class="stat-bar"><div class="stat-bar-fill" style="--fill: 85%"></div></div>
+                </div>
+                
+                <div class="stat-card" data-reveal data-delay="200">
+                    <div class="stat-value">
+                        <span class="counter" data-target="0">0</span>
+                    </div>
+                    <div class="stat-label">Unified Wearable Payment Solutions</div>
+                    <div class="stat-bar"><div class="stat-bar-fill" style="--fill: 3%"></div></div>
+                </div>
+                
+                <div class="stat-card" data-reveal data-delay="300">
+                    <div class="stat-value">
+                        <span class="counter" data-target="52">0</span><span class="stat-suffix">M</span>
+                    </div>
+                    <div class="stat-label">Potential Users in South Korea</div>
+                    <div class="stat-bar"><div class="stat-bar-fill" style="--fill: 75%"></div></div>
+                </div>
+            </div>
+            
+            <!-- Competitive Advantage Table -->
+            <div class="comparison-section" data-reveal>
+                <h3 class="comparison-title">Why VendorLink Leads</h3>
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th class="highlight">VendorLink</th>
+                                <th>Existing Solutions</th>
+                                <th>Traditional POS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Wearable-First Design</td>
+                                <td class="highlight"><span class="check">✓</span></td>
+                                <td><span class="cross">✕</span></td>
+                                <td><span class="cross">✕</span></td>
+                            </tr>
+                            <tr>
+                                <td>Offline Transactions</td>
+                                <td class="highlight"><span class="check">✓</span></td>
+                                <td><span class="cross">✕</span></td>
+                                <td><span class="partial">Partial</span></td>
+                            </tr>
+                            <tr>
+                                <td>QR Code Payments</td>
+                                <td class="highlight"><span class="check">✓</span></td>
+                                <td><span class="check">✓</span></td>
+                                <td><span class="cross">✕</span></td>
+                            </tr>
+                            <tr>
+                                <td>Hardware Agnostic</td>
+                                <td class="highlight"><span class="check">✓</span></td>
+                                <td><span class="cross">✕</span></td>
+                                <td><span class="cross">✕</span></td>
+                            </tr>
+                            <tr>
+                                <td>Multi-VPA Support</td>
+                                <td class="highlight"><span class="check">✓</span></td>
+                                <td><span class="partial">Limited</span></td>
+                                <td><span class="cross">✕</span></td>
+                            </tr>
+                            <tr>
+                                <td>7-Day Battery Life</td>
+                                <td class="highlight"><span class="check">✓</span></td>
+                                <td><span class="cross">✕</span></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>B2B SDK Licensing</td>
+                                <td class="highlight"><span class="check">✓</span></td>
+                                <td><span class="cross">✕</span></td>
+                                <td><span class="cross">✕</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== TEAM SECTION ====== -->
+    <section class="section team-section" id="team">
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <span class="section-tag">Our Team</span>
+                <h2 class="section-title">Built by Researchers.<br><span class="gradient-text">Driven by Impact.</span></h2>
+                <p class="section-desc">Our team combines deep technical expertise from IIT Kanpur and Seoul National University 
+                    with real-world entrepreneurial experience to build the future of wearable payments.</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card team-card-featured" data-reveal>
+                    <div class="team-avatar">
+                        <div class="avatar-placeholder">
+                            <span>VS</span>
+                        </div>
+                        <div class="team-badge-role">CEO</div>
+                    </div>
+                    <h3 class="team-name">Vijiyant Tanaji Shejwalkar</h3>
+                    <p class="team-role">Founder & CEO, Product Development Lead</p>
+                    <p class="team-credentials">PhD CSE, IIT Kanpur · CPI 9.33 (Dept. Topper)</p>
+                    <p class="team-desc">Leading product development and business strategy. Combines deep computer science research with a vision for financial inclusion through wearable technology.</p>
+                </div>
+                
+                <div class="team-card" data-reveal data-delay="100">
+                    <div class="team-avatar">
+                        <div class="avatar-placeholder advisor">
+                            <span>AR</span>
+                        </div>
+                        <div class="team-badge-role">Advisor</div>
+                    </div>
+                    <h3 class="team-name">Mr. Avelo Roy</h3>
+                    <p class="team-role">MD, Kolkata Ventures</p>
+                    <p class="team-desc">Providing strategic advisory and virtual incubation support. Extensive experience in startup ecosystem building and venture capital.</p>
+                </div>
+                
+                <div class="team-card" data-reveal data-delay="200">
+                    <div class="team-avatar">
+                        <div class="avatar-placeholder advisor">
+                            <span>SR</span>
+                        </div>
+                        <div class="team-badge-role">Primary Advisor</div>
+                    </div>
+                    <h3 class="team-name">Prof. Sruti S Ragavan</h3>
+                    <p class="team-role">Department of CSE, IIT Kanpur</p>
+                    <p class="team-desc">Primary academic advisor guiding the technical direction and research methodology of the VendorLink payment platform.</p>
+                </div>
+                
+                <div class="team-card" data-reveal data-delay="300">
+                    <div class="team-avatar">
+                        <div class="avatar-placeholder advisor">
+                            <span>TS</span>
+                        </div>
+                        <div class="team-badge-role">Collaborator</div>
+                    </div>
+                    <h3 class="team-name">Prof. Tushar Sandhan</h3>
+                    <p class="team-role">Perception & Intelligence Lab, IIT Kanpur</p>
+                    <p class="team-credentials">Ph.D., Seoul National University, South Korea</p>
+                    <p class="team-desc">Deep expertise in AI/perception systems with strong South Korean connections. Bridging academic research with market-ready wearable solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== CTA / CONTACT SECTION ====== -->
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info" data-reveal>
+                    <span class="section-tag">Partner With Us</span>
+                    <h2 class="section-title">Ready to Bring Wearable<br><span class="gradient-text">Payments to Your Platform?</span></h2>
+                    <p class="contact-desc">VendorLink partners exclusively with businesses and hardware manufacturers. 
+                        If you're building wearable devices, managing payment infrastructure, or looking to integrate 
+                        cutting-edge payment solutions — let's talk.</p>
+                    
+                    <div class="contact-features">
+                        <div class="contact-feature">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12L11 14L15 10M21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12C3 7.03 7.03 3 12 3C16.97 3 21 7.03 21 12Z" stroke="#00E5CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>Enterprise SDK Licensing</span>
+                        </div>
+                        <div class="contact-feature">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12L11 14L15 10M21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12C3 7.03 7.03 3 12 3C16.97 3 21 7.03 21 12Z" stroke="#00E5CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>White-Label Solutions</span>
+                        </div>
+                        <div class="contact-feature">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12L11 14L15 10M21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12C3 7.03 7.03 3 12 3C16.97 3 21 7.03 21 12Z" stroke="#00E5CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>Dedicated Technical Support</span>
+                        </div>
+                        <div class="contact-feature">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12L11 14L15 10M21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12C3 7.03 7.03 3 12 3C16.97 3 21 7.03 21 12Z" stroke="#00E5CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>Co-Development Partnerships</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-wrapper" data-reveal data-delay="200">
+                    <form class="contact-form" id="contactForm">
+                        <h3 class="form-title">Request a Demo</h3>
+                        <p class="form-subtitle">For enterprise & B2B inquiries only</p>
+                        
+                        <div class="form-group">
+                            <label for="companyName">Company Name *</label>
+                            <input type="text" id="companyName" name="companyName" placeholder="Samsung Electronics" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" placeholder="Kim Min-jun" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobTitle">Job Title</label>
+                                <input type="text" id="jobTitle" name="jobTitle" placeholder="VP of Payments">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Business Email *</label>
+                            <input type="email" id="email" name="email" placeholder="minjun@company.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest">Area of Interest</label>
+                            <select id="interest" name="interest">
+                                <option value="">Select an option</option>
+                                <option value="sdk">SDK Licensing</option>
+                                <option value="whitelabel">White-Label Solution</option>
+                                <option value="partnership">Strategic Partnership</option>
+                                <option value="investment">Investment Inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Tell us about your project and how we can help..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Submit Inquiry</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        
+                        <p class="form-disclaimer">By submitting, you agree to our privacy policy. We respond to all enterprise inquiries within 24 hours.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 40 40" fill="none">
+                                <circle cx="20" cy="20" r="18" stroke="url(#logoGrad2)" stroke-width="2.5" fill="none"/>
+                                <path d="M14 20L18 26L28 14" stroke="url(#logoGrad2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <defs><linearGradient id="logoGrad2" x1="0" y1="0" x2="40" y2="40"><stop offset="0%" stop-color="#00E5CC"/><stop offset="100%" stop-color="#00B4D8"/></linearGradient></defs>
+                            </svg>
+                        </div>
+                        <span class="logo-text">VENDOR<span class="accent">LINK</span></span>
+                    </a>
+                    <p class="footer-tagline">Building the unified wearable payment standard for South Korea. Empowering businesses with next-generation payment infrastructure.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Company</h4>
+                        <a href="#about">About Us</a>
+                        <a href="#team">Team</a>
+                        <a href="#market">Market</a>
+                        <a href="/careers">Careers</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Solutions</h4>
+                        <a href="#technology">Technology</a>
+                        <a href="#solutions">B2B Integration</a>
+                        <a href="#">SDK Documentation</a>
+                        <a href="#">API Reference</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Resources</h4>
+                        <a href="/careers">Job Openings</a>
+                        <a href="/admin">Admin Portal</a>
+                        <a href="#contact">Contact & Demo</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2026 VendorLink. All rights reserved. Incubated at SIIC, IIT Kanpur.</p>
+                <div class="footer-legal">
+                    <a href="/careers">Careers</a>
+                    <a href="/admin">Admin Portal</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

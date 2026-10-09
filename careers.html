@@ -356,18 +356,18 @@
     <!-- NAVIGATION -->
     <nav class="navbar scrolled" id="navbar">
         <div class="container nav-container">
-            <a href="/" class="nav-logo">
+            <a href="index.html" class="nav-logo">
                 <div class="logo-icon">
                     <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="url(#lg1)" stroke-width="2.5" fill="none"/><path d="M14 20L18 26L28 14" stroke="url(#lg1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="lg1" x1="0" y1="0" x2="40" y2="40"><stop offset="0%" stop-color="#00E5CC"/><stop offset="100%" stop-color="#00B4D8"/></linearGradient></defs></svg>
                 </div>
                 <span class="logo-text">VENDOR<span class="accent">LINK</span></span>
             </a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/#about" class="nav-link">About</a></li>
-                <li><a href="/#technology" class="nav-link">Technology</a></li>
-                <li><a href="/careers" class="nav-link active">Careers</a></li>
-                <li><a href="/#contact" class="nav-link nav-cta">Partner With Us</a></li>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#technology" class="nav-link">Technology</a></li>
+                <li><a href="careers.html" class="nav-link active">Careers</a></li>
+                <li><a href="index.html#contact" class="nav-link nav-cta">Partner With Us</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
@@ -472,7 +472,7 @@
                         <textarea name="education" rows="2" placeholder="e.g., B.Tech CSE from KAIST, 2020" required></textarea>
                     </div>
 
-                    <div class="form-row">
+                    <div class="form-row" data-only="api">
                         <div class="form-group">
                             <label>Resume / CV <span class="required">*</span></label>
                             <input type="file" name="resume" accept=".pdf,.doc,.docx" required>
@@ -481,6 +481,11 @@
                             <label>Cover Letter (File)</label>
                             <input type="file" name="coverLetter" accept=".pdf,.doc,.docx,.txt">
                         </div>
+                    </div>
+
+                    <div class="form-group" data-only="static" hidden>
+                        <label>Resume / CV Link <span class="required">*</span></label>
+                        <input type="url" name="resumeLink" placeholder="Google Drive, Dropbox or LinkedIn link" required>
                     </div>
 
                     <div class="form-group">
@@ -492,7 +497,8 @@
                         <span>Submit Application</span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
-                    <p class="form-note">Your information is securely stored and only shared with our hiring team.</p>
+                    <p class="form-note" data-only="api">Your information is securely stored and only shared with our hiring team.</p>
+                    <p class="form-note" data-only="static" hidden>Your information is only shared with our hiring team. Please make sure your resume link is viewable by anyone with the link.</p>
                 </form>
             </div>
         </div>
@@ -507,29 +513,35 @@
             <div class="footer-bottom" style="border-top:none;">
                 <p class="footer-copyright">&copy; 2026 VendorLink. All rights reserved. Incubated at SIIC, IIT Kanpur.</p>
                 <div class="footer-legal">
-                    <a href="/">Home</a>
-                    <a href="/careers">Careers</a>
-                    <a href="/#contact">Contact</a>
+                    <a href="index.html">Home</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="index.html#contact">Contact</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <script src="js/config.js"></script>
+    <script src="js/forms.js"></script>
     <script>
-    const API = '';
     let allJobs = [];
     let currentFilter = 'all';
 
     // ===== LOAD JOBS =====
     async function loadJobs() {
         try {
-            const res = await fetch(`${API}/api/careers`);
-            const data = await res.json();
-            if (data.success) {
+            if (VendorLink.isStatic()) {
+                const res = await fetch('data/careers.json');
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                allJobs = await res.json();
+            } else {
+                const res = await fetch(VendorLink.apiUrl('/api/careers'));
+                const data = await res.json();
+                if (!data.success) throw new Error(data.error);
                 allJobs = data.data;
-                document.getElementById('countText').textContent = `${allJobs.length} Open Position${allJobs.length !== 1 ? 's' : ''}`;
-                renderJobs();
             }
+            document.getElementById('countText').textContent = `${allJobs.length} Open Position${allJobs.length !== 1 ? 's' : ''}`;
+            renderJobs();
         } catch (err) {
             console.error('Failed to load jobs:', err);
             document.getElementById('countText').textContent = 'Unable to load positions';
@@ -636,23 +648,38 @@
 
         try {
             const formData = new FormData(e.target);
-            const res = await fetch(`${API}/api/applications`, { method: 'POST', body: formData });
-            const data = await res.json();
+            const d = Object.fromEntries(formData);
+            const { method } = await VendorLink.submit({
+                apiPath: '/api/applications',
+                formData,
+                subject: `[VendorLink Job Application] ${d.careerTitle} - ${d.name}`,
+                emailLines: [
+                    `Position: ${d.careerTitle}`,
+                    `Name: ${d.name}`,
+                    `Email: ${d.email}`,
+                    `Phone: ${d.phone || 'N/A'}`,
+                    `Total experience: ${d.experience}`,
+                    `Address: ${d.address || 'N/A'}`,
+                    `Education: ${d.education}`,
+                    `Resume: ${d.resumeLink}`,
+                    '',
+                    'Cover letter:',
+                    d.coverLetterText || 'N/A'
+                ]
+            });
 
-            if (data.success) {
-                btn.innerHTML = '<span>✓ Application Submitted!</span>';
-                btn.classList.add('success');
-                showToast('Application submitted successfully! We will review it shortly.', 'success');
-                setTimeout(() => {
-                    closeModal();
-                    e.target.reset();
-                    btn.disabled = false;
-                    btn.classList.remove('success');
-                    btn.innerHTML = '<span>Submit Application</span><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-                }, 3000);
-            } else {
-                throw new Error(data.error || 'Submission failed');
-            }
+            btn.innerHTML = '<span>✓ Application Submitted!</span>';
+            btn.classList.add('success');
+            showToast(method === 'email'
+                ? `Your email app should open with your application filled in — just press Send. If it doesn't, email us at ${VendorLink.config.contactEmail}.`
+                : 'Application submitted successfully! We will review it shortly.', 'success');
+            setTimeout(() => {
+                closeModal();
+                e.target.reset();
+                btn.disabled = false;
+                btn.classList.remove('success');
+                btn.innerHTML = '<span>Submit Application</span><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            }, 3000);
         } catch (err) {
             btn.disabled = false;
             btn.innerHTML = '<span>Submit Application</span><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -675,6 +702,7 @@
     });
 
     // ===== INIT =====
+    VendorLink.applyModeVisibility();
     loadJobs();
     </script>
 </body>

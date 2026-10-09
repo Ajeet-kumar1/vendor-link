@@ -63,7 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            if (href === '#') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+            const target = document.querySelector(href);
             if (target) {
                 const offset = navbar.offsetHeight + 20;
                 const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
@@ -207,6 +212,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formData = new FormData(contactForm);
             const data = Object.fromEntries(formData);
+            const interestSelect = contactForm.querySelector('#interest');
+            const interestText = interestSelect.value ? interestSelect.selectedOptions[0].text : 'Not specified';
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalHTML = submitBtn.innerHTML;
 
@@ -214,27 +221,33 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
 
             try {
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
+                const { method } = await VendorLink.submit({
+                    apiPath: '/api/contact',
+                    formData,
+                    asJson: true,
+                    subject: `[VendorLink Partner Inquiry] ${data.companyName} - ${data.fullName}`,
+                    emailLines: [
+                        `Company: ${data.companyName}`,
+                        `Name: ${data.fullName}`,
+                        `Job title: ${data.jobTitle || 'N/A'}`,
+                        `Email: ${data.email}`,
+                        `Area of interest: ${interestText}`,
+                        '',
+                        data.message || ''
+                    ]
                 });
-                const result = await response.json();
 
-                if (result.success) {
-                    submitBtn.innerHTML = '<span>✓ Inquiry Received! Check Email</span>';
-                    submitBtn.classList.add('success');
+                submitBtn.innerHTML = method === 'email'
+                    ? '<span>✓ Opening your email app...</span>'
+                    : '<span>✓ Inquiry Received!</span>';
+                submitBtn.classList.add('success');
 
-                    // Show success notification banner if element exists or inline
-                    setTimeout(() => {
-                        submitBtn.innerHTML = originalHTML;
-                        submitBtn.disabled = false;
-                        submitBtn.classList.remove('success');
-                        contactForm.reset();
-                    }, 4000);
-                } else {
-                    throw new Error(result.error || 'Failed to submit inquiry');
-                }
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalHTML;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('success');
+                    contactForm.reset();
+                }, 4000);
             } catch (err) {
                 console.error('Contact submission error:', err);
                 submitBtn.innerHTML = '<span>✕ Submission Failed</span>';
@@ -244,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     submitBtn.disabled = false;
                     submitBtn.style.background = '';
                 }, 3500);
-                alert(err.message || 'Error sending inquiry. Please try again or email admin@vendorlink.kr directly.');
+                alert(err.message || `Error sending inquiry. Please try again or email ${VendorLink.config.contactEmail} directly.`);
             }
         });
     }

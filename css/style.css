@@ -39,6 +39,7 @@
    Reset & Base
    ========================================================================== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 html { scroll-behavior: smooth; font-size: 16px; }
 
@@ -1191,7 +1192,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 28px;
 }
 
@@ -1541,6 +1542,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
   .tech-grid { grid-template-columns: repeat(2, 1fr); }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-card-featured { grid-column: 1 / -1; }
   .contact-grid { grid-template-columns: 1fr; gap: 48px; }
   .footer-top { grid-template-columns: 1fr; gap: 48px; }
 }

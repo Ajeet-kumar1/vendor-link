@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <title>VendorLink Admin Portal — Enterprise Applications & Query Management</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -639,8 +640,8 @@
             </li>
         </ul>
         <div class="sidebar-footer">
-            <a href="/" target="_blank">🌐 View Live Website &rarr;</a>
-            <a href="/careers" target="_blank">📄 View Careers Page &rarr;</a>
+            <a href="index.html" target="_blank">🌐 View Live Website &rarr;</a>
+            <a href="careers.html" target="_blank">📄 View Careers Page &rarr;</a>
         </div>
     </aside>
 
@@ -653,7 +654,7 @@
             </div>
             <div class="header-actions">
                 <button class="btn btn-secondary" onclick="refreshCurrentTab()">🔄 Refresh Data</button>
-                <a href="/careers" target="_blank" class="btn btn-primary">➕ Open Careers Page</a>
+                <a href="careers.html" target="_blank" class="btn btn-primary">➕ Open Careers Page</a>
             </div>
         </div>
 
@@ -961,7 +962,10 @@
 
     <div class="toast-container" id="toast-container"></div>
 
+    <script src="js/config.js"></script>
     <script>
+        const API_BASE = (window.VENDORLINK_CONFIG && window.VENDORLINK_CONFIG.apiBase) || '';
+
         // Global state
         let currentTabId = 'dashboard';
         const appStatuses = ['new', 'viewed', 'action_taken', 'interviewing', 'shortlisted', 'hired', 'rejected', 'on_hold'];
@@ -1044,7 +1048,7 @@
         // API Helpers
         async function fetchAPI(endpoint, options = {}) {
             try {
-                const response = await fetch(endpoint, {
+                const response = await fetch(API_BASE + endpoint, {
                     ...options,
                     headers: {
                         'Content-Type': 'application/json',
@@ -1170,7 +1174,7 @@
                                     ${app.resume_path ? `
                                         <div class="info-group">
                                             <label>Resume / CV</label>
-                                            <a href="/uploads/${app.resume_path}" target="_blank" class="download-btn">
+                                            <a href="${API_BASE}/uploads/${app.resume_path}" target="_blank" class="download-btn">
                                                 📄 Download & View Resume
                                             </a>
                                         </div>
@@ -1181,7 +1185,7 @@
                                         <label>Cover Letter</label>
                                         <p style="white-space: pre-line;">${app.cover_letter_text || 'No text cover letter.'}</p>
                                         ${app.cover_letter_path ? `
-                                            <a href="/uploads/${app.cover_letter_path}" target="_blank" class="download-btn">
+                                            <a href="${API_BASE}/uploads/${app.cover_letter_path}" target="_blank" class="download-btn">
                                                 📄 Download Cover Letter File
                                             </a>
                                         ` : ''}
@@ -1507,6 +1511,21 @@
 
         // Init
         document.addEventListener('DOMContentLoaded', () => {
+            // Static hosting (GitHub Pages): no backend to manage, so show a notice instead
+            const config = window.VENDORLINK_CONFIG || {};
+            if (config.apiBase === null || config.apiBase === undefined) {
+                document.querySelector('.main-content').innerHTML = `
+                    <div class="empty-state" style="max-width: 560px; margin: 80px auto; text-align: center;">
+                        <h1 style="margin-bottom: 12px;">Admin dashboard unavailable</h1>
+                        <p>This site is running on static hosting, which has no backend server.
+                        Applications and partner inquiries are delivered by email instead.</p>
+                        <p style="margin-top: 12px;">Deploy the Node.js server in <code>server/</code> and set
+                        <code>apiBase</code> in <code>js/config.js</code> to enable this dashboard.</p>
+                    </div>`;
+                document.querySelector('.nav-links').remove();
+                return;
+            }
+
             loadStats();
             loadDashboardSummary();
 

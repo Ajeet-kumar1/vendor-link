@@ -1,0 +1,11 @@
+# Dependencies (reinstall with: cd server && npm install)
+server/node_modules/
+
+# Runtime data created by the Node server — contains applicant & contact details
+server/vendorlink.db
+uploads/
+
+# Secrets & OS files
+.env
+.DS_Store
+Thumbs.db

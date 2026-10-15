@@ -1300,7 +1300,8 @@ h3 { font-size: clamp(1.15rem, 1.8vw, 1.35rem); font-weight: 700; }
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: minmax(0, 440px);
+  justify-content: center;
   gap: 26px;
 }
 
@@ -1356,13 +1357,6 @@ h3 { font-size: clamp(1.15rem, 1.8vw, 1.35rem); font-weight: 700; }
   font-weight: 800;
   font-size: 1.45rem;
   color: var(--white);
-}
-
-.avatar-placeholder.advisor { background: var(--grad-brand); box-shadow: 0 0 0 5px var(--white), 0 0 0 7px var(--c-cyan-bg); }
-
-.team-card:nth-child(3) .avatar-placeholder.advisor {
-  background: linear-gradient(135deg, #DB2777, #F59E0B);
-  box-shadow: 0 0 0 5px var(--white), 0 0 0 7px var(--c-pink-bg);
 }
 
 .team-badge-role {
@@ -1658,8 +1652,6 @@ h3 { font-size: clamp(1.15rem, 1.8vw, 1.35rem); font-weight: 700; }
   .problem-solution-grid { grid-template-columns: 1fr; }
   .tech-grid { grid-template-columns: repeat(2, 1fr); }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .team-grid { grid-template-columns: repeat(2, 1fr); }
-  .team-card-featured { grid-column: 1 / -1; }
   .contact-grid { grid-template-columns: 1fr; gap: 48px; }
   .footer-top { grid-template-columns: 1fr; gap: 48px; }
 }
@@ -1695,7 +1687,6 @@ h3 { font-size: clamp(1.15rem, 1.8vw, 1.35rem); font-weight: 700; }
 
   .tech-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: 1fr; }
-  .team-grid { grid-template-columns: 1fr; }
   .contact-features { grid-template-columns: 1fr; }
 
   .form-row { grid-template-columns: 1fr; }
